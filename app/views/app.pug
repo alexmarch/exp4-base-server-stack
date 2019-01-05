@@ -1,0 +1,15 @@
+extends layout.pug
+block style
+    link(rel="stylesheet", href="app.css")
+
+block head-script
+    script
+        include preload.js
+
+block content
+    #app.preload
+        p {{ message }}
+        a(href="/") Home
+
+block body-script
+    script(src="bundle.js")
