@@ -19,16 +19,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post('/upload', upload.array('files', process.env.UPLOAD_MAX_COUNT || 10), (req, res) => {
-
-	const create = (f) => {
-		return File.create({
+	const p = req.files.map(f => (
+		File.create({
 			name: f.filename,
 			originName: f.originalname,
 			url: `http://localhost:5000/static/file/${f.filename}`
-		});
-	};
+		})));
 
-	const p = req.files.map(f => create(f));
 	Promise.all(p)
 		.then(() => res.json({ status: 'success' }))
 		.catch(error => res.status(400).json({ error, status: 'error' }));
