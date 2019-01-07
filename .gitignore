@@ -1,4 +1,8 @@
 .cache/
 node_modules/
 app/public/dist/
+app/uploads/
+!app/uploads/.gitkeep
 *.sqlite
+
+yarn-error.json

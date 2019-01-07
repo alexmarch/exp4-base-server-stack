@@ -7,10 +7,10 @@ const errors = require('./errors');
 const middlewares = require('./middlewares');
 const indexRouter = require('./router');
 const webpackConfig = require('./webpack.config');
-const db = require('./db');
+const db = require('./config/db')('mongo');
 
 let port = process.env.PORT || 5000;
-let host = 'localhost';
+let host = process.env.HOST || 'localhost';
 
 app.set('views', path.resolve(__dirname, './views'));
 app.set('view engine', 'pug');
@@ -29,7 +29,7 @@ db.authenticate()
 	.then(() => console.log('DB connection has been established successfully.'))
 	.catch(err => console.error('Unable to connect to the database:', err));
 
-webpackConfig(() => {
+webpackConfig(app, () => {
 	httpServer.listen({ port, host }, () => {
 		const { address, port } = httpServer.address();
 		console.log(`HTTP server listen on http://${address}:${port}/ address`);
