@@ -7,7 +7,7 @@ const errors = require('./errors');
 const middlewares = require('./middlewares');
 const indexRouter = require('./router');
 const webpackConfig = require('./webpack.config');
-const db = require('./config/db')('mongo');
+const db = require('./config/db')(process.env.DB_TYPE);
 
 let port = process.env.PORT || 5000;
 let host = process.env.HOST || 'localhost';

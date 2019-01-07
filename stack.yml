@@ -21,4 +21,5 @@ services:
       DB_PASS: password
       DB_NAME: app
       DB_HOST: mongo
+      DB_TYPE: mongo
       HOST: 0.0.0.0
